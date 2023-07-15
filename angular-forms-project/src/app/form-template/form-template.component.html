@@ -1,0 +1,112 @@
+
+
+<div class="container-fluid py-3">
+    <div class="row justify-content-center my-5">
+      <div class="col-10">
+        <form #userForm="ngForm" (ngSubmit)="validate()" novalidate  [appMatchPassword]="['password', 'confirmPassword']">
+            <div class="row">
+                <div class="col mb-2">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" name="name" [(ngModel)]="user.name" #name="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && name.errors }" required minlength="1" maxlength="250" />
+                    <div *ngIf="userForm.submitted && name.errors" class="invalid-feedback">
+                        <div *ngIf="name.errors['required']">
+                            The field is required.
+                        </div>
+                        <div *ngIf="name.errors['minlength']">
+                            The field should be minimum 1 characters long.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mb-2">
+                    <label for="nickname" class="form-label">NickName:</label>
+                    <input type="text" class="form-control" name="nickname" [(ngModel)]="user.nickname" #nickname="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && nickname.errors }" required minlength="1" maxlength="10" pattern="^[a-zA-Z]+$" />
+                    <div *ngIf="userForm.submitted && nickname.errors" class="invalid-feedback">
+                        <div *ngIf="nickname.errors['required']">
+                            The Field is required.
+                        </div>
+                        <div *ngIf="nickname.errors['minlength']">
+                            The field should be minimum 1 characters long.
+                        </div>
+                        <div *ngIf="nickname.errors['pattern']">
+                            Only characters are allowed.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mb-2">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" class="form-control" name="email" [(ngModel)]="user.email" #email="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && email.errors }" required email/>
+                    <div *ngIf="userForm.submitted && email.errors" class="invalid-feedback">
+                        <div *ngIf="email.errors['required']">
+                            The Field is required.
+                        </div>
+                        <div *ngIf="email.errors['email']">
+                            Please mention valid email.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mb-2">
+                    <label for="password" class="form-label">Password:</label>
+                    <div class="input-group input-group-sm has-validation">
+                        <input [type]="user.showPassword ? 'text' : 'password'" class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && password.errors }" required minlength="8"/>
+                        <button type="button" class="btn btn-outline-secondary" (click)="user.showPassword = !user.showPassword">
+                            <i class="bi" [ngClass]="{'bi-eye-fill': !user.showPassword, 'bi-eye-slash-fill': user.showPassword}"></i>
+                        </button>
+                        <div *ngIf="userForm.submitted && password.errors" class="invalid-feedback">
+                            <div *ngIf="password.errors['required']">
+                                The Field is required.
+                            </div>
+                            <div *ngIf="password.errors['minlength']">
+                                The field should be minimum 8 characters long.
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col mb-2">
+                    <label for="confirmPassword" class="form-label">Confirm Password:</label>
+                    <div class="input-group input-group-sm has-validation">
+                        <input [type]="user.showPassword ? 'text' : 'password'" class="form-control form-control-sm" name="confirmPassword" [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel" [ngClass]="{ 'is-invalid': userForm.submitted && confirmPassword.errors }" minlength="8" required/>
+                        <button type="button" class="btn btn-outline-secondary" (click)="user.showPassword = !user.showPassword">
+                            <i class="bi" [ngClass]="{'bi-eye-fill': !user.showPassword, 'bi-eye-slash-fill': user.showPassword}"></i>
+                        </button>
+                        <div *ngIf="userForm.submitted && confirmPassword.errors" class="invalid-feedback">
+                            <div *ngIf="confirmPassword.errors['required']">
+                                The Field is required.
+                            </div>
+                            <div *ngIf="confirmPassword.errors['minlength']">
+                                The field should be minimum 8 characters long.
+                            </div>
+                            <div *ngIf="confirmPassword.errors['matching']">
+                                Password and confirmPassword do not match.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </div>
+            </div>
+
+
+          <div class="row">
+            <div class="col mb-2 d-grid">
+              <button type="submit" class="btn btn-sm btn-primary">Validate</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+    

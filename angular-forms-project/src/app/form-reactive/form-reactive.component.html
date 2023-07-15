@@ -1,0 +1,107 @@
+
+<div class="container-fluid py-3">
+    <div class="row justify-content-center my-5">
+      <div class="col-10">
+        <form [formGroup]="reactiveForm" #form="ngForm">
+          <div class="row">
+            <div class="col mb-2">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" id="name" name="name" formControlName="name" placeholder="Your name" class="form-control form-control-sm" [class.is-invalid]="f['name'].invalid && (f['name'].dirty || f['name'].touched)">
+              <div *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)" class="invalid-feedback">
+                <div *ngIf="f['name'].errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="f['name'].errors?.['minlength']">
+                  This field must have at least 1 character.
+                </div>
+                <div *ngIf="f['name'].errors?.['maxlength']">
+                  This field must have at most 250 characters.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <label for="nickname" class="form-label">Nickname:</label>
+              <input type="text" id="nickname" name="nickname" formControlName="nickname" placeholder="Your nickname" class="form-control form-control-sm" [class.is-invalid]="f['nickname'].invalid && (f['nickname'].dirty || f['nickname'].touched)">
+              <div *ngIf="f['nickname'].invalid && (f['nickname'].dirty || f['nickname'].touched)" class="invalid-feedback">
+                <div *ngIf="f['nickname'].errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="f['nickname'].errors?.['maxlength']">
+                  This field must have at most 10 characters.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" id="email" name="email" formControlName="email" placeholder="your-name@provider.com" class="form-control form-control-sm" [class.is-invalid]="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
+              <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="invalid-feedback">
+                <div *ngIf="f['email'].errors?.['required']">
+                  This field is required.
+                </div>
+                <div *ngIf="f['email'].errors?.['minlength']">
+                  This field must have at least 1 character.
+                </div>
+                <div *ngIf="f['email'].errors?.['maxlength']">
+                  This field must have at most 250 characters.
+                </div>
+                <div *ngIf="!f['email'].errors?.['required'] && !f['email'].errors?.['minlength'] && !f['email'].errors?.['maxlength']">
+                  Invalid email format.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <label for="password" class="form-label">Password:</label>
+              <div class="input-group input-group-sm has-validation">
+                <input [type]="user.showPassword ? 'text' : 'password'" id="password" name="password" formControlName="password" class="form-control form-control-sm" [class.is-invalid]="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+                <button type="button" class="btn btn-outline-secondary" (click)="user.showPassword = !user.showPassword">
+                  <i class="bi" [ngClass]="{'bi-eye-fill': !user.showPassword, 'bi-eye-slash-fill': user.showPassword}"></i>
+                </button>
+                <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="invalid-feedback">
+                  <div *ngIf="f['password'].errors?.['required']">
+                    This field is required.
+                  </div>
+                  <div *ngIf="f['password'].errors?.['minlength']">
+                    This field must have at least 8 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <label for="confirmPassword" class="form-label">Confirm Password:</label>
+              <div class="input-group input-group-sm has-validation">
+                <input [type]="user.showPassword ? 'text' : 'password'" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" class="form-control form-control-sm" [class.is-invalid]="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)">
+                <button type="button" class="btn btn-outline-secondary" (click)="user.showPassword = !user.showPassword">
+                  <i class="bi" [ngClass]="{'bi-eye-fill': !user.showPassword, 'bi-eye-slash-fill': user.showPassword}"></i>
+                </button>
+                <div *ngIf="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)" class="invalid-feedback">
+                  <div *ngIf="f['confirmPassword'].errors?.['required']">
+                    This field is required.
+                  </div>
+                  <div *ngIf="f['confirmPassword'].errors?.['minlength']">
+                    This field must have at least 8 characters.
+                  </div>
+                  <div *ngIf="f['confirmPassword'].errors?.['matching']">
+                    Password doesn't match.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2 d-grid">
+              <button type="button" class="btn btn-sm btn-primary" (click)="validate()">Validate</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    
